@@ -1,19 +1,24 @@
 app.factory('AuthenticationService', function ($rootScope, $log, $location, $resource, $http, Domain) {
     'use strict';
 
-    var currentUser;
-
-    var resource = $resource('/api/login/user'),
+    var currentUser,
+        whiteListedUrls = [],
+        resource = $resource('/api/login/user'),
         loginHandlerSpring = '/login',
         logoutHandlerSpring = '/logout';
 
     function redirectToLoginPage(event, next, current) {
-        $log.debug('Current event is: ' + event.name);
-        // no logged user, we should be going to #login
-        if (next.templateUrl === 'views/login.html' || (current && current.loadedTemplateUrl === 'views/login.html')) {
-            // already going to #login, no redirect needed
+        if (event && next && current) {
+            $log.debug('Current event is: ' + event.name);
+            // no logged user, we should be going to #login
+            if (next.templateUrl === 'views/login.html' || (current && current.loadedTemplateUrl === 'views/login.html')) {
+                // already going to #login, no redirect needed
+            } else {
+                // not going to #login, we should redirect now
+                $location.path('/loginPage');
+            }
         } else {
-            // not going to #login, we should redirect now
+            // fallback
             $location.path('/loginPage');
         }
     }
@@ -24,8 +29,15 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, $res
             $rootScope.user = user;
             if (user.isValid()) {
                 $log.info('Login revalidation was sucessfull for user ' + user.username);
+                if (!next || !next.loadedTemplateUrl) {
+                    // valid users without resolved template get redirected to home
+                    $location.path('/home');
+                }
             } else {
-                redirectToLoginPage(event, next, current);
+                // check white listed URLs
+                if (whiteListedUrls.indexOf(next.loadedTemplateUrl) === -1) {
+                    redirectToLoginPage(event, next, current);
+                }
             }
         }, function (user) {
             $rootScope.user = user;
@@ -37,7 +49,7 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, $res
         return resource.get({},
             function (response) {
                 $log.info('Got a valid user response');
-                callback(Domain.User.build(response.username, response.permissions, response.customers));
+                callback(Domain.User.build(response.username, response.userId, response.permissions, response.customers));
             },
             function () {
                 $log.error('Could not read user details.');
@@ -70,6 +82,12 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, $res
             getUserDetails(callback, errorCallback);
         },
         getCurrentUser: function () {
+            if (!currentUser || !currentUser.customers) {
+                validateUser();
+            }
+            if (!currentUser.isValid()) {
+                redirectToLoginPage();
+            }
             return currentUser;
         },
         validateUser: validateUser,

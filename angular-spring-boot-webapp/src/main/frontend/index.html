@@ -1,0 +1,122 @@
+<!doctype html>
+<html ng-app="ngSpringBootApp">
+<head>
+    <meta charset="utf-8">
+    <title>{{ 'GENERAL_TITLE' | translate }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../../../bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <link rel="stylesheet" href="../../../bower_components/ng-table/dist/ng-table.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="container">
+    <div class="navbar navbar-default" role="navigation">
+        <img src="images/AngularJS.jpg">
+
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">{{ 'GENERAL_TITLE' | translate }}</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" ng-controller="NavCtrl">
+                    <li><a id="navEvent"
+                           ng-class="{active: isActive('/event')}" ng-href="#/event" ng-show="user.isValid()"
+                           translate="NAV_EVENTS"></a></li>
+                    <li><a class="last" id="navLogout"
+                           ng-show="user.isValid()" ng-click="logout()"
+                           translate="NAV_LOGOUT"></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="bg" class="container-fluid">
+    <div class="container">
+        <div ng-view=""></div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p id="info">
+            <i>Demo Company GmbH</i> | Copyright 2015
+        </p>
+    </div>
+</footer>
+
+
+<!-- build:js scripts/shim.js -->
+<script src="../../../bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="../../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../../bower_components/angular/angular.js"></script>
+<script src="../../../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../../../bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+<script src="../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../../../bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="../../../bower_components/angular-invocation-handler/dist/angular-invocation-handler.js"></script>
+<script src="../../../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../../../bower_components/angular-route/angular-route.js"></script>
+<script src="../../../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../../../bower_components/angular-touch/angular-touch.js"></script>
+<script src="../../../bower_components/angular-translate/angular-translate.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+<script src="../../../bower_components/ng-table/dist/ng-table.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/ctrl.login.js"></script>
+<script src="scripts/controllers/ctrl.nav.js"></script>
+<script src="scripts/controllers/ctrl.main.js"></script>
+<script src="scripts/controllers/ctrl.about.js"></script>
+<script src="scripts/controllers/ctrl.event.js"></script>
+<script src="scripts/services/srv.auth.js"></script>
+<script src="scripts/services/srv.domain.js"></script>
+<script src="scripts/services/srv.event.js"></script>
+<script src="scripts/services/srv.errorHandling.js"></script>
+<script src="scripts/services/srv.user.js"></script>
+<script src="scripts/util/proto.string.js"></script>
+<!-- endbuild -->
+</body>
+</html>

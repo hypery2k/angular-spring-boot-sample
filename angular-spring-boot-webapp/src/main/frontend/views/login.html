@@ -1,0 +1,24 @@
+<div class="login">
+    <fieldset>
+        <form role="form" name="loginForm" ng-submit="login(loginForm)">
+            <div class="form-group">
+                <label for="username">{{ 'LOGIN_FORM_USERNAME' | translate }}:</label>
+                <input type="text" class="form-control" id="username"
+                       name="username" ng-required="true" ng-model="credentials.username"/>
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'LOGIN_FORM_PASSWORD' | translate }}:</label>
+                <input type="password"
+                       class="form-control"
+                       id="password"
+                       name="password"
+                       ng-required="true"
+                       ng-model="credentials.password"/>
+
+            </div>
+            <button class="btn btn-success btn-block" id="login" name="login"
+                    ng-disabled="loginForm.$invalid" translate="LOGIN_FORM_SUBMIT"
+                    type="submit"></button>
+        </form>
+    </fieldset>
+</div>

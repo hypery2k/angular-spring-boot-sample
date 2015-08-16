@@ -1,0 +1,35 @@
+{
+  "name": "ngSpring",
+  "version": "0.2.0",
+  "description": "ngSpring app",
+  "dependencies": {
+    "angular": "1.4.4",
+    "angular-animate": "1.4.4",
+    "angular-block-ui": "~0.2.0",
+    "angular-bootstrap": "0.13.0",
+    "angular-cookies": "1.4.4",
+    "angular-invocation-handler": "1.2.2",
+    "angular-resource": "1.4.4",
+    "angular-route": "1.4.4",
+    "angular-sanitize": "1.4.4",
+    "angular-touch": "1.4.4",
+    "angular-translate": "2.7.2",
+    "bootstrap-sass-official": "3.2.0",
+    "compass-mixins": "~1.0.2",
+    "ng-table": "~0.8.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.4"
+  },
+  "resolutions": {
+    "angular": "1.4.4",
+    "angular-sanitize": "1.4.4",
+    "angular-animate": "1.4.4"
+  },
+  "appPath": "src/main/frontend",
+  "bowerPath": "bower_components",
+  "testPath": "src/test/frontend",
+  "resPath": "src/main/resources",
+  "distPath": "target/dist",
+  "docPath": "target/docs"
+}

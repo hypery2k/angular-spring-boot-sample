@@ -1,0 +1,145 @@
+<h1 translate="EVENT_HEADLINE"></h1>
+
+<fieldset>
+    <legend translate="EVENT_SELECTION_HEADING"></legend>
+    <div class="table-responsive row">
+        <table class="table" ng-table="tableParams">
+            <thead>
+            <tr>
+                <th>
+                    {{'EVENT_CREATION_DATE'| translate}}
+                </th>
+                <th>
+                    {{'EVENT_DESCRIPTION'| translate}}
+                </th>
+                <th>
+                    {{'EVENT_START_DATE'| translate}}
+                </th>
+                <th>
+                    {{'EVENT_END_DATE'| translate}}
+                </th>
+                <th>
+                    {{'GENERAL_EDIT'| translate}}
+                </th>
+                <th>
+                    {{'GENERAL_DELETE'| translate}}
+                </th>
+            </tr>
+            </thead>
+            <tr ng-repeat="event in $data" class="success">
+                <td>
+                    {{::event.insertDate}}
+                </td>
+                <td>
+                    {{::event.eventDescription}}
+                </td>
+                <td>
+                    {{::event.startDate | date: 'dd.MM.yy'}}
+                </td>
+                <td>
+                    {{::event.endDate | date: 'dd.MM.yy'}}
+                </td>
+                <td>
+                    <button ng-click="getEvent(event.eventId)">
+                        <span class="glyphicon glyphicon-wrench"></span>
+                    </button>
+                </td>
+                <td>
+                    <button ng-click="deleteEvent(event)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <button class="btn btn-success btn-block"
+                    ng-hide="currentEvent" ng-click="createEvent()"
+                    translate="GENERAL_ADD"
+                    type="submit"></button>
+        </div>
+    </div>
+</fieldset>
+<fieldset ng-show="currentEvent">
+    <legend translate="EVENT_EDIT_HEADING"></legend>
+    <form role="form" name="eventForm" ng-submit="saveEvent(eventForm)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="eventDescription">{{ 'EVENT_DESCRIPTION' | translate }}: *</label>
+                    <input id="eventDescription"
+                           name="eventDescription" class="form-control"
+                           ng-model="currentEvent.eventDescription" ng-required="true">
+                </div>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="startDate">{{ 'EVENT_START_DATE' | translate }}: *</label>
+
+                    <p class="input-group">
+                        <input type="text" id="startDate" name="startDate" class="form-control"
+                               ng-model="currentEvent.startDate"
+                               datepicker-popup="{{format}}" is-open="startDateOpened"
+                               close-text="{{'GENERAL_CLOSE' | translate}}"
+                               current-text="{{ 'GENERAL_TODAY' | translate }}"
+                               clear-text="{{ 'GENERAL_DELETE' | translate }}" ng-required="true">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-primary"
+                                    ng-click="openStartDate($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+						</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="endDate">{{ 'EVENT_END_DATE' | translate }}:</label>
+
+                    <p class="input-group">
+                        <input type="text" id="endDate" name="endDate" class="form-control"
+                               ng-model="currentEvent.endDate" optional-date="endDate"
+                               datepicker-popup="{{format}}" is-open="endDateOpened"
+                               close-text="{{'GENERAL_CLOSE' | translate}}"
+                               current-text="{{ 'GENERAL_TODAY' | translate }}"
+                               clear-text="{{ 'GENERAL_DELETE' | translate }}">
+                        <span class="input-group-btn">
+							<button type="button" class="btn btn-primary"
+                                    ng-click="openEndDate($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+						</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block"
+                                    ng-disabled="eventForm.$error['required'] || eventForm.startDate.$invalid"
+                                    translate="GENERAL_SAVE"
+                                    type="submit"></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-block"
+                                    translate="GENERAL_CANCEL" ng-click="reset()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
