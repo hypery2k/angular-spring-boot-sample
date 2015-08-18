@@ -1,0 +1,1 @@
+web: java -Dspring.profiles.active=heroku -jar angular-spring-boot-webapp/target/ng-spring-boot.jar
