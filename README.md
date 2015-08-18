@@ -1,4 +1,6 @@
 # Angular Spring Demo Application 
+[![Build Status](https://travis-ci.org/hypery2k/angular-spring-boot-sample.svg)](https://travis-ci.org/hypery2k/angular-spring-boot-sample)
+
 ## Development-Setup
 
 ### Setup
