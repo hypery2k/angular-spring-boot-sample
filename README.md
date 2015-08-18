@@ -34,7 +34,15 @@ Projects can now imported in your favourite IDE
 
 ### Development
 
-To start the frontend:
+
+1. start the backend:
+
+```bash
+$ cd angular-spring-boot-webapp
+$ mvn spring-boot:run
+```
+
+2. start the frontend:
 
 ```bash
 $ cd angular-spring-boot-webapp
@@ -46,12 +54,6 @@ Browser now [openes at http://localhost:9000](http://localhost:9000)
 
 > Note: Any changes in the frontend will be lead to a reload in the browser
 
-To start the backend:
-
-```bash
-$ cd angular-spring-boot-webapp
-$ mvn spring-boot:run
-```
 
 Backend is available at [](http://localhost:9080) with user/password
 API is available at [](http://localhost:9080/swagger-ui.html)

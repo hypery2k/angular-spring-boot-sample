@@ -29,8 +29,11 @@
         <rest-assurred.version>2.4.1</rest-assurred.version>
         <spring-fox.version>2.0.3</spring-fox.version>
         <!-- frontend dependendies -->
-        <node.version>v0.12.7</node.version>
-        <npm.version>2.13.3</npm.version>
+        <!-- see https://github.com/eirslett/frontend-maven-plugin/issues/250
+        <node.version>v0.11.15</node.version>
+        -->
+        <node.version>v0.10.40</node.version>
+        <npm.version>3.3.0</npm.version>
         <!-- Maven Plugins -->
         <flyway-maven-plugin.version>3.2.1</flyway-maven-plugin.version>
         <docker-maven-plugin.version>2.5.0</docker-maven-plugin.version>
@@ -192,13 +195,23 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>javascript tests</id>
+                        <id>javascript unit tests</id>
                         <goals>
-                            <goal>karma</goal>
+                            <goal>grunt</goal>
                         </goals>
                         <phase>test</phase>
                         <configuration>
-                            <karmaConfPath>karma.conf.ci.js</karmaConfPath>
+                            <arguments>unit-tests-ci</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>javascript e2e tests</id>
+                        <goals>
+                            <goal>grunt</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <arguments>e2e-tests-ci</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -207,6 +220,20 @@
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
                     <filesets>
+                        <fileset>
+                            <directory>bower_components</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                        <fileset>
+                            <directory>node_modules</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
                         <fileset>
                             <directory>src/main/resources/static</directory>
                             <includes>
