@@ -2,6 +2,7 @@
   "name": "ngSpring",
   "version": "0.2.0",
   "description": "ngSpring app",
+  "license": "MIT",
   "repository": {},
   "dependencies": {},
   "devDependencies": {
