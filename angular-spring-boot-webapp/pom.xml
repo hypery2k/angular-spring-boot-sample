@@ -37,7 +37,7 @@
         <!-- Maven Plugins -->
         <flyway-maven-plugin.version>3.2.1</flyway-maven-plugin.version>
         <docker-maven-plugin.version>2.5.0</docker-maven-plugin.version>
-        <frontend-maven-plugin.version>0.0.24</frontend-maven-plugin.version>
+        <frontend-maven-plugin.version>0.0.25</frontend-maven-plugin.version>
     </properties>
 
     <dependencies>
