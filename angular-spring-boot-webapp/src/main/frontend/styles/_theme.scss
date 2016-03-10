@@ -2,12 +2,36 @@
 $nav-link-padding: 10px 10px !default;
 $panel-heading-padding: 10px 10px !default;
 
-.navbar-default .navbar-nav > li > a.active {
-  color: #555555;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-  cursor: default;
+/* Custom page header */
+.navbar {
+  .navbar-nav > li > a.active {
+    color: #555555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+    margin: 0px;
+  }
+
+  .navbar-brand {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .logo {
+      width: 35px;
+      margin-top: 5px;
+      margin-left: 10px;
+
+      @media screen and (min-width: 767px) {
+        width: 50px;
+        margin-top: 0px;
+        margin-left: 0;
+        padding-left: 0;
+        height: 50px;
+      }
+    }
+  }
+
 }
 
 .container-fluid {
