@@ -104,6 +104,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- tag::spring-devtools[] -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- tag::spring-devtools[] -->
         <!-- tag::swagger-include[] -->
         <dependency>
             <groupId>io.springfox</groupId>
