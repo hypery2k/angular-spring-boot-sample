@@ -9,10 +9,10 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, Redi
 
     function redirectToLoginPage(event, next, current) {
         if (event && next && current) {
-            // already logged in, no redirect neede
+            // already logged in, no redirect needed
         } else {
             // fallback
-            RedirectService.redirect('/login');
+            RedirectService.redirect(loginHandlerSpring);
         }
     }
 
@@ -22,10 +22,7 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, Redi
             $rootScope.user = user;
             if (user.isValid()) {
                 $log.info('Login revalidation was sucessfull for user ' + user.username);
-                if (!next || !next.loadedTemplateUrl) {
-                    // valid users without resolved template get redirected to home
-                    $location.path('/home');
-                }
+                $rootScope.$broadcast('userUpdate', user);
             } else {
                 // check white listed URLs
                 if (whiteListedUrls.indexOf(next.loadedTemplateUrl) === -1) {

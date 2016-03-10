@@ -48,7 +48,7 @@ app.config(function ($routeProvider) {
             controller: 'EventCtrl'
         })
         .otherwise({
-            redirectTo: '/login'
+            redirectTo: '/event'
         });
 });
 

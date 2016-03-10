@@ -3,7 +3,7 @@ describe('Service: authenticationService', function () {
 
 
     // load the controller's module
-    beforeEach(module('ngSpringBootApp'));
+    beforeEach(module('ngSpringBootAppMock'));
 
     var service,
         redirectService,
@@ -19,6 +19,8 @@ describe('Service: authenticationService', function () {
         redirectService = RedirectService;
         service = AuthenticationService;
         httpBackend = _$httpBackend_;
+        spyOn(redirectService, 'redirect').and.callFake(function () {
+        });
     }));
 
     describe('error handling', function () {
