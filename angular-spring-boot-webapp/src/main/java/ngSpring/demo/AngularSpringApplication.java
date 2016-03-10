@@ -16,12 +16,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
 
+//tag::spring-app[]
 @SpringBootApplication
 @ComponentScan
 @EnableAutoConfiguration
+//end::spring-app[]
 //tag::swagger-docs[]
 @EnableSwagger2
+//tag::spring-app[]
 public class AngularSpringApplication extends SpringBootServletInitializer {
+//end::spring-app[]
 
     @Bean
     public Docket ngSpringApi() {
@@ -60,8 +64,9 @@ public class AngularSpringApplication extends SpringBootServletInitializer {
                 .build();
     } //end::swagger-docs[]
 
+    //tag::spring-app[]
     public static void main(String[] args) {
         SpringApplication.run(AngularSpringApplication.class, args);
     }
-
+    //end::spring-app[]
 }
