@@ -181,7 +181,7 @@
                     <execution>
                         <id>javascript unit tests</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>grunt</goal>
                         </goals>
                         <phase>test</phase>
                         <configuration>
