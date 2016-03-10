@@ -1,25 +1,18 @@
-app.factory('AuthenticationService', function ($rootScope, $log, $location, $resource, $http, Domain) {
+app.factory('AuthenticationService', function ($rootScope, $log, $location, RedirectService, $resource, $http, Domain) {
     'use strict';
 
     var currentUser,
         whiteListedUrls = [],
-        resource = $resource('/api/login/user'),
-        loginHandlerSpring = '/login',
-        logoutHandlerSpring = '/logout';
+        resource = $resource('./api/login/user'),
+        loginHandlerSpring = './login',
+        logoutHandlerSpring = './logout';
 
     function redirectToLoginPage(event, next, current) {
         if (event && next && current) {
-            $log.debug('Current event is: ' + event.name);
-            // no logged user, we should be going to #login
-            if (next.templateUrl === 'views/login.html' || (current && current.loadedTemplateUrl === 'views/login.html')) {
-                // already going to #login, no redirect needed
-            } else {
-                // not going to #login, we should redirect now
-                $location.path('/loginPage');
-            }
+            // already logged in, no redirect neede
         } else {
             // fallback
-            $location.path('/loginPage');
+            RedirectService.redirect('/login');
         }
     }
 
@@ -100,6 +93,7 @@ app.factory('AuthenticationService', function ($rootScope, $log, $location, $res
                     $log.error('Got a logout error');
                     errorCallback(Domain.User.build());
                 });
+            redirectToLoginPage();
         }
     };
 });

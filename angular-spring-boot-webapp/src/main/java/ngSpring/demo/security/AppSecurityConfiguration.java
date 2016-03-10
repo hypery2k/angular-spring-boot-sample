@@ -13,10 +13,12 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
  *
  * @author hypery2k
  */
+//tag::thymeleaf-config]
 @Configuration
 @EnableWebMvcSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
+//end::thymeleaf-config]
 
     // public ressources which are not secured
     private static final String[] UNSECURED_RESOURCE_LIST =
@@ -27,13 +29,15 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(UNSECURED_RESOURCE_LIST);
     }
 
+    //tag::thymeleaf-config]
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(UNSECURED_RESOURCE_LIST).authenticated();
         http.csrf().disable();
         // use form authentication for web app
-        http.authorizeRequests().and().formLogin();
+        http.authorizeRequests().and().formLogin().loginPage("/login");
         // enable HTTP basic authentication for REST calls
         http.authorizeRequests().antMatchers("/api/**").authenticated().and().httpBasic();
+        //end::thymeleaf-config]
     }
 }

@@ -22,7 +22,6 @@ app.controller('NavCtrl', function ($rootScope, $scope, $log, $translate, $locat
         AuthenticationService.logout(function (response) {
             $rootScope.user = response;
             $log.info('Logout complete.');
-            $location.path('/');
         }, function () {
             $log.error('Logout failure for user.');
             $translate('LOGOUT_ERROR').then(function (translatedValue) {

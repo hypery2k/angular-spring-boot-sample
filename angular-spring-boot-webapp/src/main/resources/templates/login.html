@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+        >
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>eventCMS - Login </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous"/>
+
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        h2 {
+            font-family: "Verdana";
+            font-weight: bold;
+        }
+
+        .gray {
+            color: #999;
+        }
+
+        .red {
+            color: #a94442;
+        }
+
+        .alert {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input#username, .form-signin input#password {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input#password, .submit-btn {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 class="text-center"><span class="gray">event</span><span class="red">CMS</span></h2>
+
+    <form class="form-signin" th:action="@{/login}" method="post">
+
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
+               autofocus=""/>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required=""/>
+        <button id="login" class="submit-btn btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+        <strong>Error</strong>
+        Invalid username and password.
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if="${param.logout}">
+        <strong>Success</strong>
+        You have been logged out.
+    </div>
+
+</div>
+
+</body>
+</html>

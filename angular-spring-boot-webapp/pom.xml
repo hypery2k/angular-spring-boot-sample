@@ -93,8 +93,6 @@
             <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -106,6 +104,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- tag::swagger-include[] -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -116,6 +115,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${spring-fox.version}</version>
         </dependency>
+        <!-- end::swagger-include[] -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
@@ -223,6 +223,7 @@
                     </filesets>
                 </configuration>
             </plugin>
+            <!-- tag::frontend-maven-plugin[] -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -244,6 +245,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- end::frontend-maven-plugin[] -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -338,7 +340,7 @@
             <id>docker</id>
             <build>
                 <plugins>
-                    <!-- tag::docker-mac-maven-plugin[] -->
+                    <!-- tag::docker-maven-plugin[] -->
                     <plugin>
                         <groupId>com.alexecollins.docker</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
@@ -363,7 +365,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- end::docker-mac-maven-plugin[] -->
+                    <!-- end::docker-maven-plugin[] -->
                 </plugins>
             </build>
         </profile>

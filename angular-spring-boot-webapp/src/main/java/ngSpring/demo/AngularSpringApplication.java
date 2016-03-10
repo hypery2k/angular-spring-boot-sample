@@ -2,8 +2,11 @@ package ngSpring.demo;
 
 import com.google.common.base.Predicate;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -13,13 +16,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
 
-@EnableSwagger2
 @SpringBootApplication
-public class AngularSpringApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(AngularSpringApplication.class, args);
-    }
+@ComponentScan
+@EnableAutoConfiguration
+//tag::swagger-docs[]
+@EnableSwagger2
+public class AngularSpringApplication extends SpringBootServletInitializer {
 
     // Swagger
 
@@ -58,6 +60,10 @@ public class AngularSpringApplication {
                 .licenseUrl("https://raw.githubusercontent.com/hypery2k/angular-spring-boot-sample/master/LICENSE")
                 .version("0.2.0")
                 .build();
+    } //end::swagger-docs[]
+
+    public static void main(String[] args) {
+        SpringApplication.run(AngularSpringApplication.class, args);
     }
 
 }

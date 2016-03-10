@@ -47,12 +47,8 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/event.html',
             controller: 'EventCtrl'
         })
-        .when('/loginArea', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginCtrl'
-        })
         .otherwise({
-            redirectTo: '/loginArea'
+            redirectTo: '/login'
         });
 });
 

@@ -23,7 +23,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+//tag::swagger-docs]
 @Api(basePath = "/api/events", value = "Events", description = "Operations with Events", produces = "application/json")
+//tag::swagger-docs]
+//tag::events-rest-api]
 @RestController
 @RequestMapping(value = "/api/events")
 @ResponseStatus(HttpStatus.OK)
@@ -54,6 +58,7 @@ public class EventController {
         save(dto);
         return new ResponseEntity<Message>(new Message("The event has been properly entered"), HttpStatus.OK);
     }
+    //end::events-rest-api]
 
     @ApiOperation(value = "Get event", notes = "Read event dataset")
     @RequestMapping(value = "/{eventId}", method = RequestMethod.GET)

@@ -48,12 +48,14 @@ $ mvn spring-boot:run
 $ cd angular-spring-boot-webapp
 $ npm start
 ```
-Browser now [openes at http://localhost:9000](http://localhost:9000)
 
-> Note: Any changes in the frontend will be lead to a reload in the browser
+Browser now opens [localhost:9000](http://localhost:9000)
 
+>Note: 
+Any changes in the frontend will be lead to a reload in the browser
 
 Backend is available at [](http://localhost:9080) with user/password
+
 API is available at [](http://localhost:9080/swagger-ui.html)
 
 ### Docker
