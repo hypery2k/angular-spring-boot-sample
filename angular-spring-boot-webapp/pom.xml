@@ -177,40 +177,13 @@
                         <phase>generate-resources</phase>
                     </execution>
                     <execution>
-                        <id>bower install</id>
-                        <goals>
-                            <goal>bower</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                    </execution>
-                    <execution>
-                        <id>grunt check and build</id>
-                        <goals>
-                            <goal>grunt</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <arguments>check</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>javascript unit tests</id>
                         <goals>
-                            <goal>grunt</goal>
+                            <goal>npm</goal>
                         </goals>
                         <phase>test</phase>
                         <configuration>
                             <arguments>unit-tests-ci</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>javascript e2e tests</id>
-                        <goals>
-                            <goal>grunt</goal>
-                        </goals>
-                        <phase>verify</phase>
-                        <configuration>
-                            <arguments>e2e-tests-ci</arguments>
                         </configuration>
                     </execution>
                 </executions>
