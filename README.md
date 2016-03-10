@@ -49,7 +49,9 @@ $ cd angular-spring-boot-webapp
 $ npm start
 ```
 
-Browser now opens [localhost:9000](http://localhost:9000)
+Browser now opens [localhost:9000](http://localhost:9000) and you can add some events ;)
+![](sample.png)
+
 
 >Note: 
 Any changes in the frontend will be lead to a reload in the browser
