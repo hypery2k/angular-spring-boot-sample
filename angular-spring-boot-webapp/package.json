@@ -59,7 +59,7 @@
     "_comment_begin": "tag::package-json-build[]",
     "postinstall": "bower install && npm rebuild node-sass && grunt build",
     "start": "npm install && grunt serve",
-    "test": "grunt test",
+    "test": "grunt check && grunt test",
     "_comment_end": "end::package-json-build[]"
   }
 }
