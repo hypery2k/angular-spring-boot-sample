@@ -13,7 +13,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.2.5.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
+        <!-- lookup parent from repository -->
     </parent>
 
     <properties>
@@ -29,11 +30,8 @@
         <rest-assurred.version>2.4.1</rest-assurred.version>
         <spring-fox.version>2.0.3</spring-fox.version>
         <!-- frontend dependendies -->
-        <!-- see https://github.com/eirslett/frontend-maven-plugin/issues/250
-        <node.version>v0.11.15</node.version>
-        -->
-        <node.version>v0.10.40</node.version>
-        <npm.version>3.3.0</npm.version>
+        <node.version>v4.2.2</node.version>
+        <npm.version>2.14.7</npm.version>
         <!-- Maven Plugins -->
         <flyway-maven-plugin.version>3.2.1</flyway-maven-plugin.version>
         <docker-maven-plugin.version>2.5.0</docker-maven-plugin.version>
@@ -151,6 +149,7 @@
         <defaultGoal>clean install</defaultGoal>
         <finalName>ng-spring-boot</finalName>
         <plugins>
+            <!-- tag::frontend-maven-plugin[] -->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -216,6 +215,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- end::frontend-maven-plugin[] -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
@@ -336,6 +336,7 @@
             <build>
                 <pluginManagement>
                     <plugins>
+                        <!-- tag::docker-maven-plugin[] -->
                         <plugin>
                             <groupId>com.alexecollins.docker</groupId>
                             <artifactId>docker-maven-plugin</artifactId>
@@ -349,6 +350,7 @@
                                 </dependency>
                             </dependencies>
                         </plugin>
+                        <!-- end::docker-maven-plugin[] -->
                     </plugins>
                 </pluginManagement>
             </build>

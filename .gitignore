@@ -20,3 +20,4 @@ angular-spring-boot-webapp/src/main/resources/static/*
 *.iml
 *.ipr
 *.iws
+*.log

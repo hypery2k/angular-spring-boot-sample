@@ -46,9 +46,7 @@ $ mvn spring-boot:run
 
 ```bash
 $ cd angular-spring-boot-webapp
-$ npm install
-$ bower install
-$ grunt serve
+$ npm start
 ```
 Browser now [openes at http://localhost:9000](http://localhost:9000)
 
@@ -63,5 +61,5 @@ API is available at [](http://localhost:9080/swagger-ui.html)
 #### Run
 
 ```bash
-$ ./startLocalDocker
+$ mvn -Pdocker spring-boot:run
 ```
