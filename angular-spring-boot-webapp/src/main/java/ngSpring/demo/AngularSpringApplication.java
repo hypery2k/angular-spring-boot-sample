@@ -23,8 +23,6 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class AngularSpringApplication extends SpringBootServletInitializer {
 
-    // Swagger
-
     @Bean
     public Docket ngSpringApi() {
         return new Docket(DocumentationType.SWAGGER_2)

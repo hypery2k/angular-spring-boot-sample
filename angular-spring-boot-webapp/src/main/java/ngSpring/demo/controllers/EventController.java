@@ -24,14 +24,15 @@ import java.util.Iterator;
 import java.util.List;
 
 
-//tag::swagger-docs]
+//tag::swagger-docs[]
 @Api(basePath = "/api/events", value = "Events", description = "Operations with Events", produces = "application/json")
-//tag::swagger-docs]
-//tag::events-rest-api]
+//end::swagger-docs[]
+//tag::events-rest-api[]
 @RestController
 @RequestMapping(value = "/api/events")
 @ResponseStatus(HttpStatus.OK)
 public class EventController {
+//end::events-rest-api[]
 
     @Autowired
     private EventTransformer eventTransformer;
@@ -41,6 +42,7 @@ public class EventController {
 
     private Sort sort = new Sort(new Order(Sort.Direction.ASC, "startDate"));
 
+    //tag::events-rest-api[]
     @RequestMapping(method = RequestMethod.GET)
     public List<EventDTO> getEvents(@RequestParam(required = false) boolean includeDeleted) {
         Iterator<Event> iterator = eventRepository.findAll().iterator();
@@ -58,7 +60,7 @@ public class EventController {
         save(dto);
         return new ResponseEntity<Message>(new Message("The event has been properly entered"), HttpStatus.OK);
     }
-    //end::events-rest-api]
+    //end::events-rest-api[]
 
     @ApiOperation(value = "Get event", notes = "Read event dataset")
     @RequestMapping(value = "/{eventId}", method = RequestMethod.GET)
