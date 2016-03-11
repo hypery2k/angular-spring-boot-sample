@@ -110,7 +110,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- tag::spring-devtools[] -->
+        <!-- end::spring-devtools[] -->
         <!-- tag::swagger-include[] -->
         <dependency>
             <groupId>io.springfox</groupId>
