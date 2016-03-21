@@ -42,7 +42,6 @@ public class EventController {
 
     private Sort sort = new Sort(new Order(Sort.Direction.ASC, "startDate"));
 
-    //tag::events-rest-api[]
     @RequestMapping(method = RequestMethod.GET)
     public List<EventDTO> getEvents(@RequestParam(required = false) boolean includeDeleted) {
         Iterator<Event> iterator = eventRepository.findAll().iterator();
@@ -53,6 +52,7 @@ public class EventController {
         return eventTransformer.transformToDTOs(events);
     }
 
+    //tag::events-rest-api[]
     @ApiOperation(value = "Update an event", notes = "Updates an existing event dataset")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Fields are with validation errors")})
     @RequestMapping(method = RequestMethod.POST)
