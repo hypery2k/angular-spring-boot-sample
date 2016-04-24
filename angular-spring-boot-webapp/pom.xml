@@ -31,10 +31,12 @@
         <commons-io.version>1.3.2</commons-io.version>
         <rest-assurred.version>2.4.1</rest-assurred.version>
         <spring-fox.version>2.0.3</spring-fox.version>
+        <mysql-connector.version>5.1.37</mysql-connector.version>
         <!-- frontend dependendies -->
         <node.version>v4.2.2</node.version>
         <npm.version>2.14.7</npm.version>
         <!-- Maven Plugins -->
+        <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
         <flyway-maven-plugin.version>3.2.1</flyway-maven-plugin.version>
         <docker-maven-plugin.version>2.5.0</docker-maven-plugin.version>
         <frontend-maven-plugin.version>0.0.25</frontend-maven-plugin.version>
@@ -285,10 +287,46 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway-maven-plugin.version}</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost/NGSPRING</url>
+                    <url>jdbc:mysql://33.33.33.10:3306/NGSPRING</url>
                     <user>ngspring</user>
                     <password>password</password>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql-connector.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>
+                        <![CDATA[jdbc:mysql://localhost:${mysql.port}/NGSPRING?useUnicode=true&characterEncoding=utf8]]></url>
+                    <username>spring</username>
+                    <password>y0ul4ughy0ul00t</password>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-data</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <orderFile>ascending</orderFile>
+                            <fileset>
+                                <basedir>${basedir}/src/test/resources/setup</basedir>
+                                <includes>
+                                    <include>test.sql</include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

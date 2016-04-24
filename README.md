@@ -38,6 +38,7 @@ Projects can now imported in your favourite IDE
 1. start the backend:
 
 ```bash
+$ vagrant up
 $ cd angular-spring-boot-webapp
 $ mvn spring-boot:run
 ```

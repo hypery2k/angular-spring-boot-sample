@@ -14,6 +14,7 @@ angular-spring-boot-webapp/src/main/resources/static/*
 **/target
 **/bin
 **/.springBeans
+Procfile
 
 # IDEA files
 .idea/*
@@ -21,3 +22,6 @@ angular-spring-boot-webapp/src/main/resources/static/*
 *.ipr
 *.iws
 *.log
+
+# Vagrant
+.vagrant/*
