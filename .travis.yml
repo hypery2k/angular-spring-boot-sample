@@ -1,8 +1,11 @@
+sudo: required
+services:
+  - docker
 language: java
 jdk:
   - oraclejdk8
 script:
-  - mvn clean verify
+  - mvn -Pdocker clean verify
 addons:
  - googlechrome
 before_install:
