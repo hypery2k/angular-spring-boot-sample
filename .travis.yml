@@ -8,13 +8,11 @@ language: java
 jdk:
   - oraclejdk8
 
-install:
+script:
   - export MAVEN_SKIP_RC=true
   - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
   - "export PATH=`pwd`/bin:$PATH"
   - echo $HOME
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-
-script:
   - mvn -Pdocker clean verify
