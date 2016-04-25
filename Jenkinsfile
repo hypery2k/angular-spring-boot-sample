@@ -14,7 +14,7 @@ node {
    
    stage 'Integration-Tests'
    wrap([$class: 'Xvfb']) {
-        sh "${mvnHome}/bin/mvn verify"
+        sh "${mvnHome}/bin/mvn -Pdocker clean verify"
    }
    
    step([
@@ -34,4 +34,5 @@ node {
        alwaysLinkToLastBuild:true,
        allowMissing: false
     ])
+ 
 }
