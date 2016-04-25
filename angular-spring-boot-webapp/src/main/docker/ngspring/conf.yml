@@ -2,15 +2,17 @@
 packaging:
   # files to add to the build, usually used with ADD in the Dockerfile
   add:
-    - target/ng-spring-boot.jar
+    - target/${project.build.finalName}.jar
 # optional list of port to expose on the host
 ports:
-  - 40080
+  - ${server.port}
 healthChecks:
   pings:
-    - url: http://localhost:40080/actuator/health
-      timeout: 80000
+    - url: http://localhost:${server.port}/
+      timeout: 60000
+links:
+  - mysql:db
 # how long in milliseconds to sleep after start-up (default 0)
 sleep: 5000
 # tag to use for images
-tag: demo/app:ng-spring-boot-${project.version}
+tag: ngspring/app:${project.version}

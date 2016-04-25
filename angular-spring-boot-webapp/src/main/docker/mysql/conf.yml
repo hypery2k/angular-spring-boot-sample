@@ -1,0 +1,6 @@
+ports:
+  - ${mysql.port} 3306
+healthChecks:
+  logPatterns:
+    - "ready for connections"
+tag: ngspring/db:${project.version}

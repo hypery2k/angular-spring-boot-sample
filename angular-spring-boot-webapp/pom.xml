@@ -32,13 +32,20 @@
         <rest-assurred.version>2.4.1</rest-assurred.version>
         <spring-fox.version>2.0.3</spring-fox.version>
         <mysql-connector.version>5.1.37</mysql-connector.version>
+        <serenity.version>1.1.31</serenity.version>
+        <threadCount.uitest>12</threadCount.uitest>
+        <webdriver.driver>firefox</webdriver.driver>
+        <!-- testing config -->
+        <server.port>41180</server.port>
+        <mysql.port>33306</mysql.port>
+        <webdriver.base.url>http://localhost:9080/</webdriver.base.url>
         <!-- frontend dependendies -->
         <node.version>v4.2.2</node.version>
         <npm.version>2.14.7</npm.version>
         <!-- Maven Plugins -->
         <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
         <flyway-maven-plugin.version>3.2.1</flyway-maven-plugin.version>
-        <docker-maven-plugin.version>2.5.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>2.11.4</docker-maven-plugin.version>
         <frontend-maven-plugin.version>0.0.25</frontend-maven-plugin.version>
     </properties>
 
@@ -126,11 +133,6 @@
         </dependency>
         <!-- end::swagger-include[] -->
         <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assurred.version}</version>
@@ -156,6 +158,25 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Need to exclude for servlet API, see https://groups.google.com/forum/#!topic/thucydides-users/HwfhPGseucI-->
+                <exclusion>
+                    <groupId>net.sourceforge.htmlunit</groupId>
+                    <artifactId>htmlunit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-junit</artifactId>
+            <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -280,6 +301,30 @@
                             </includes>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>ui-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the VM argument line used when unit tests are run. -->
+                            <argLine>${failsafeArgLine}</argLine>
+                            <skipTests>${skipITs}</skipTests>
+                            <includes>
+                                <include>**/*SerenityIT.class</include>
+                            </includes>
+                            <threadCount>${threadCount.uitest}</threadCount>
+                            <parallel>classes</parallel>
+                            <systemPropertyVariables>
+                                <webdriver.driver>${webdriver.driver}</webdriver.driver>
+                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                                <serenity.issue.tracker.url>
+                                    https://github.com/hypery2k/angular-spring-boot-sample/issues{0}
+                                </serenity.issue.tracker.url>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -291,6 +336,31 @@
                     <user>ngspring</user>
                     <password>password</password>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version>
+                <configuration>
+                    <outputDirectory>${basedir}/target/site/serenity/</outputDirectory>
+                    <sourceDirectory>${basedir}/target/site/serenity/</sourceDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-core</artifactId>
+                        <version>${serenity.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -306,8 +376,8 @@
                     <driver>com.mysql.jdbc.Driver</driver>
                     <url>
                         <![CDATA[jdbc:mysql://localhost:${mysql.port}/NGSPRING?useUnicode=true&characterEncoding=utf8]]></url>
-                    <username>spring</username>
-                    <password>y0ul4ughy0ul00t</password>
+                    <username>ngspring</username>
+                    <password>password</password>
                 </configuration>
                 <executions>
                     <execution>
@@ -383,6 +453,9 @@
         </profile>
         <profile>
             <id>docker</id>
+            <properties>
+                <webdriver.base.url>http://localhost:${server.port}/</webdriver.base.url>
+            </properties>
             <build>
                 <plugins>
                     <!-- tag::docker-maven-plugin[] -->
@@ -406,7 +479,7 @@
                                     <goal>package</goal>
                                     <goal>start</goal>
                                 </goals>
-                                <phase>pre-integration-test</phase>
+                                <phase>package</phase>
                             </execution>
                         </executions>
                     </plugin>

@@ -1,0 +1,3 @@
+username,password,fail
+user,password,false
+user2,password,true
