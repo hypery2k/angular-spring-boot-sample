@@ -1,14 +1,19 @@
 sudo: required
+
 services:
   - docker
+
 language: java
 jdk:
   - oraclejdk8
-script:
-  - mvn -Pdocker clean verify
-addons:
- - googlechrome
+
 before_script:
+  - export MAVEN_SKIP_RC=true
+  - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+  - "export PATH=`pwd`/bin:$PATH"
+  - echo $HOME
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+
+script:
+  - mvn -Pdocker clean verify
