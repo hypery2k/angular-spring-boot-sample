@@ -1,4 +1,5 @@
-sudo: false
+sudo: required
+dist: trusty
 
 services:
   - docker
@@ -7,7 +8,7 @@ language: java
 jdk:
   - oraclejdk8
 
-before_script:
+install:
   - export MAVEN_SKIP_RC=true
   - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
   - "export PATH=`pwd`/bin:$PATH"
