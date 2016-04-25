@@ -17,4 +17,4 @@ install:
   - "sh -e /etc/init.d/xvfb start"
 
 script:
-  - export DISPLAY=:99.0 && mvn -Pdocker clean verify
+  - export DISPLAY=:99.0 && mvn clean test
